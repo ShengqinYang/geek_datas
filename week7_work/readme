@@ -1,0 +1,43 @@
+1.使用 RDD API 实现带词频的倒排索引
+InvertedIndex.scala
+
+解题思路：
+1.逐个读取文件，并将文件内容拆分成 (filename, word) 生成rdd，拼接多个文件
+    (file_0,it)
+    (file_0,is)
+    (file_0,what)
+    (file_0,it)
+    (file_0,is)
+    (file_1,what)
+    (file_1,is)
+    (file_1,it)
+    (file_2,it)
+    (file_2,is)
+    (file_2,a)
+    (file_2,banana)
+
+2.生成词频，((filename, word), 词频)，并实现reducebykey
+   ((file_0,it),2)
+   ((file_2,it),1)
+   ((file_1,it),1)
+   ((file_2,banana),1)
+   ((file_0,is),2)
+   ((file_2,a),1)
+   ((file_2,is),1)
+   ((file_1,is),1)
+   ((file_1,what),1)
+   ((file_0,what),1)
+
+3.交换位置，(word, (filename, 词频))，并实现reducebykey
+    (is,(file_0,2),(file_2,1),(file_1,1))
+    (a,(file_2,1))
+    (what,(file_1,1),(file_0,1))
+    (banana,(file_2,1))
+    (it,(file_0,2),(file_2,1),(file_1,1))
+
+4.排序并格式化输出
+    "a",{(file_2,1)}
+    "banana",{(file_2,1)}
+    "is",{(file_0,2),(file_2,1),(file_1,1)}
+    "it",{(file_0,2),(file_2,1),(file_1,1)}
+    "what",{(file_1,1),(file_0,1)}
