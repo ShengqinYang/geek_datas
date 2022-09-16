@@ -63,5 +63,5 @@ mysql> select count(*) from spend_report;
 3.在 Grafana 查看最终结果
 http://localhost:3000/d/FOe0PbmGk/walkthrough?viewPanel=2&orgId=1&refresh=10s
 ```
-![](/Users/yangshengqin/Desktop/截屏2022-09-16 15.56.59.png)
+![](./datas_flows.png)
 
